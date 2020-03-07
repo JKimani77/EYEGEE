@@ -14,9 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #path('logout/', views.logout, {"next_page": '/accounts/login'}), 
+    path('accounts/', include('registration.backends.simple.urls')),
     path('', include ('clone.urls'))
 ]
+
+#create view function to logout and config next_page after logout
