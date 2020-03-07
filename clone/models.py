@@ -11,12 +11,12 @@ class Tag(models.Model):
     name = models.CharField(max_length=30)
 
 class Image(models.Model):
-    image = models.ImageField(uploadto='photos/', null=True)
+    image = models.ImageField(upload_to='media/', null=True)
     image_name = models.CharField(max_length=40)
     image_caption = models.TextField(max_length=100, null=True, blank=True)
     likes = models.IntegerField(null=True, blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True, null=True)
-    caption = models.ForeignKey(Tag,blank = True, on_delete=models.CASCADE )
+    category = models.ForeignKey(Tag,blank = True, on_delete=models.CASCADE )
     #profile = models.ForeignKey(Profile, null=True, blank = True, on_delete=models.CASCADE)
     #user = models.ForeignKey(User)
 
