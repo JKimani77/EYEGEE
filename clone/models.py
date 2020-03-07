@@ -10,7 +10,7 @@ class Tag(models.Model):
     """ class to indicate the category of the image"""
     name = models.CharField(max_length=30)
 
-class Image(models.model):
+class Image(models.Model):
     image = models.ImageField(uploadto='photos/', null=True)
     image_name = models.CharField(max_length=40)
     image_caption = models.TextField(max_length=100, null=True, blank=True)
