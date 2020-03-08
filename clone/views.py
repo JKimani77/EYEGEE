@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.sites.shortcuts import get_current_site
-from .tokens import account_activation_token
+# from .tokens import account_activation_token
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_text
 
@@ -32,7 +32,8 @@ def signingup(request):
             user.save()
             current = get_current_site(request)
             subject = 'Activate your iNsTa'
-            message = render_to_string('email/email.html', {'user': user, 'domain': current.domain, 'uid': urlsafe_base64_encode(force_bytes(user.pk)), 'token': account_activation_token.make_token(user),})
+            # , 'token': account_activation_token.make_token(user)
+            message = render_to_string('email/email.html', {'user': user, 'domain': current.domain, 'uid': urlsafe_base64_encode(force_bytes(user.pk))})
             
             user.email_user(subject, message)
             return redirect('home')
