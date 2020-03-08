@@ -55,3 +55,10 @@ def activation(request, uidb64, token):
     return redirect('home')
   else:
     return render(request, 'accountinvalid.html')
+
+
+@login_required(login_url='/accounts/register/')
+def profile(request, id):
+  profile = get_object_or_404(User, pk=id)
+  images = profile.posts.all()
+  return render(request, 'actual/profile.html', {'profile':profile, 'images':images})

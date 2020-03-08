@@ -12,7 +12,7 @@ class Profile(models.Model):
     '''
     profile_picture =models.ImageField(upload_to='media', blank = True) 
     about = models.TextField(max_length=50)
-    user =models.OneToOneField(User, on_delete=models.CASCADE) 
+    user =models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') 
     follower_user = models.IntegerField(blank=True , null=True)
     following_user = models.IntegerField(blank=True, null=True)
 
