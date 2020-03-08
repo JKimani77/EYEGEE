@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns  = [
     path('', views.index, name='index'),
-    
+    path('(?P<id>[0-9]+)/results/', views.profile, name='profile'),
 ]
 
 if settings.DEBUG:
