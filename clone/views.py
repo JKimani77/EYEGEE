@@ -40,25 +40,28 @@ def signingup(request):
             form = SignUpForm()
             return render(request, 'signup.html', {'form': form})
 
+#code for activation below uses django-six library
+#has importation errors
 
-def activation(request, uidb64, token):
-  try:
-    user = User.objects.get()
-  except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-    user = None
 
-  if user is not None and account_activation_token.check_token(user, token):
-    user.is_active = True
-    user.profile.email_confirmed = True
-    user.save()
-    login(request, user)
-    return redirect('home')
-  else:
-    return render(request, 'accountinvalid.html')
+# def activation(request, uidb64, token):
+#   try:
+#     user = User.objects.get()
+#   except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+#     user = None
+
+#   if user is not None and account_activation_token.check_token(user, token):
+#     user.is_active = True
+#     user.profile.email_confirmed = True
+#     user.save()
+#     login(request, user)
+#     return redirect('home')
+#   else:
+#     return render(request, 'accountinvalid.html')
 
 
 @login_required(login_url='/accounts/register/')
 def profile(request, id):
   profile = get_object_or_404(User, pk=id)
   images = profile.posts.all()
-  return render(request, 'actual/profile.html', {'profile':profile, 'images':images})
+  return render(request, 'profile.html', {'profile':profile, 'images':images})

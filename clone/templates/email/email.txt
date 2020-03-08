@@ -1,0 +1,4 @@
+Hi, {{name}}
+
+Thank you for creating an iNsTa account! Go post some photos, and see what your friends are up to.
+
