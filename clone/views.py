@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from .models import Image, Profile, Comment
+from .forms import SignUpForm
 
 
 from django.conf import settings
@@ -15,3 +16,7 @@ import os
 def index(request):
     images = Image.get_images()
     return render(request, 'home.html', {"images":images})
+
+def signup(request):
+    if request.method == 'POST':
+        form = Sig
