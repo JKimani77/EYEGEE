@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('logout/', views.logout, {"next_page": '/accounts/login'}), 
-    # path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
     path('', include ('clone.urls'))
 ]
 
