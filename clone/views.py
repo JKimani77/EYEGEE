@@ -10,7 +10,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from .models import Image, Profile, Comment
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginForm, ProfileForm, ImageForm, CommentForm 
 
 
 from django.conf import settings
@@ -91,24 +91,24 @@ def profile(request, id):
   return render(request, 'profile.html', {'profile':profile, 'images':images})
 
 
-#   def profile_user(request, id):
-#     current_user = request.user
-#     profile = Profile.objects.filter(user_id=id).all()
-#     images = Image.objects.filter(profile_id=current_user.profile.id).all()
-#     return render(request, 'display_profile.html', {"profile":profile, "images":images})
+  def profile_user(request, id):
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=id).all()
+    images = Image.objects.filter(profile_id=current_user.profile.id).all()
+    return render(request, 'viewprofile.html', {"profile":profile, "images":images})
 
-# def post_image(request):
-#     current_user = request.user
-#     if request.method=='POST':
-#         form = ImageForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             image = form.save(commit=False)
-#             image.profile = current_user.profile
-#             image.save()
-#             return redirect(home)
-#     else:
-#         form = ImageForm()
-#     return render(request, 'post_image.html',{"form":form})
+def post_image(request):
+    current_user = request.user
+    if request.method=='POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.profile = current_user.profile
+            image.save()
+            return redirect('home')
+    else:
+        form = ImageForm()
+    return render(request, 'post_image.html',{"form":form})
 
 # def specific_image(request, img_id):
 #     image = Image.objects.get(pk=img_id)
