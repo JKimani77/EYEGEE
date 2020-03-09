@@ -18,13 +18,15 @@ from django.urls import path, include
 from django.contrib.auth import views
 from django.conf import settings
 from django.conf.urls.static import static
+from clone.views import activate
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('logout/', views.logout, {"next_page": '/accounts/login'}), 
+    path('', include ('clone.urls')),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('', include ('clone.urls'))
+    path('activate/<uidb64>/<token>/',activate, name='activate')
 ]
 
+#path('logout/', views.logout, {"next_page": '/accounts/login'}), 
 #create view function to logout and config next_page after logout

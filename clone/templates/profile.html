@@ -1,15 +1,17 @@
 {% extends 'index.html' %}
-
+{%load bootstrap4 %}
 {% block content %}
-<div style='margin-left:auto;width:50%;border:black;' class="container">
-  <div class="row">
-    <div class="card">
-      <div>
-        <img style='width:25%;height:25%;border-radius:50%;' src="" alt="profile pic"><span style='padding-left:15px;font-size:50px;'>{{profile.username}}</span>
+<div class="container">
+    <div class="row">
+        <div class="card">
+          <div>
+            <img style='width:25%;height:25%;border-radius:50%;' src="" alt="profile pic"><span style='padding-left:15px;font-size:50px;'>{{profile.username}}</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+
 </div>
+  
 
 <hr>
 
@@ -22,4 +24,6 @@
   </div>
 </div>
 {% endfor %}
+
+<div class="jumbotron"></div>
 {% endblock %}
