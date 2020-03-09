@@ -6,7 +6,10 @@ from . import views
 
 urlpatterns  = [
     path('', views.index, name='index'),
-    path('(?P<id>[0-9]+)/results/', views.profile, name='profile'),
+    path('profile/', views.profile, name='create-profile'),
+    path('profile/<int:id>', views.profile_user, name='dipslay-profile'),
+    path('post/image', views.uploadimage, name = 'uploadimage'),
+    path('search/', views.search, name='search-user'),
 ]
 
 if settings.DEBUG:

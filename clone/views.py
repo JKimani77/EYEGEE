@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.sites.shortcuts import get_current_site
 # from .tokens import account_activation_token
 from django.utils.http import urlsafe_base64_encode
@@ -40,7 +40,7 @@ def signingup(request):
             message = render_to_string('email/email.html', {'user': user, 'domain': current.domain, 'uid': urlsafe_base64_encode(force_bytes(user.pk))})
             
             user.email_user(subject, message)
-            return redirect('home')
+            return redirect(index)
         else:
             form = SignUpForm()
             return render(request, 'signup.html', {'form': form})
@@ -65,7 +65,7 @@ def signingup(request):
 #   else:
 #     return HttpResponse('The activation link is invalid')
 
-def login(request):
+def log_in(request):
     if request.method=='POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -75,7 +75,7 @@ def login(request):
             user = authenticate(username,password)
             if user.is_active:
                 login(request,user)
-                return redirect(home)
+                return redirect(index)
             else:
                 return HttpResponse("Your account is inactive")
             
@@ -86,18 +86,27 @@ def login(request):
 
 @login_required(login_url='/accounts/register/')
 def profile(request, id):
+    '''
+    function to create user profile
+    '''
   profile = get_object_or_404(User, pk=id)
   images = profile.posts.all()
   return render(request, 'profile.html', {'profile':profile, 'images':images})
 
 
-  def profile_user(request, id):
+def profile_user(request, id):
+    '''
+    funcion to display user profile
+    '''
     current_user = request.user
     profile = Profile.objects.filter(user_id=id).all()
     images = Image.objects.filter(profile_id=current_user.profile.id).all()
     return render(request, 'viewprofile.html', {"profile":profile, "images":images})
 
-def post_image(request):
+def uploadimage(request):
+    '''
+    view function to post images
+    '''
     current_user = request.user
     if request.method=='POST':
         form = ImageForm(request.POST, request.FILES)
@@ -105,10 +114,10 @@ def post_image(request):
             image = form.save(commit=False)
             image.profile = current_user.profile
             image.save()
-            return redirect('home')
+            return redirect(index)
     else:
         form = ImageForm()
-    return render(request, 'post_image.html',{"form":form})
+    return render(request, 'uploadimage.html',{"form":form})
 
 # def specific_image(request, img_id):
 #     image = Image.objects.get(pk=img_id)
@@ -117,7 +126,7 @@ def post_image(request):
 
 
 
-def logout(request):
+def log_out(request):
     logout(request)
 
-    return redirect(home)
+    return redirect(index)
