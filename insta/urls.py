@@ -14,18 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.conf.urls import url, include
 from django.contrib.auth import views
 from django.conf import settings
 from django.conf.urls.static import static
-from clone.views import activate
+# from django_registration.backends.simple.views import RegistrationView
+
+# from clone.views import activate
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include ('clone.urls')),
-    path('accounts/', include('registration.backends.simple.urls')),
-    path('activate/<uidb64>/<token>/',activate, name='activate')
+    url(r'^admin/', admin.site.urls),
+    url('', include ('clone.urls')),
+    # url(r'^accounts/', include('registration.backends.simple.urls')),
+    # url(r'^activate/<uidb64>/<token>/',activate, name='activate'),
+    # url(r'accounts/register/', RegistrationView.as_view(success_url='/profile/'),name='django_registration_register'),
 ]
 
 #path('logout/', views.logout, {"next_page": '/accounts/login'}), 

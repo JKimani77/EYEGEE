@@ -26,10 +26,7 @@
                         <br>
                         <img src="{{pic.image.url}}" class="img-responsive" alt="image" width="500px">
                         <br>
-                        <!-- <br>
-                        <p class="modal-title" > <legend>Location</legend>{{ image.location }}</p>
-                        <br> -->
-                        <p class="modal-title" > <legend>Category</legend>{{pic.category.name }}</p>
+                       
                     </div>
                     <div class="modal-footer">
                         <div class="modal-footer">
@@ -41,6 +38,9 @@
                   </div>
                 </div>
               </div>
+              {%  endfor %}
         </div>
     </div>
 </div>
+
+{% endblock %}

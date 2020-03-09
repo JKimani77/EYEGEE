@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.sites.shortcuts import get_current_site
-# from .tokens import account_activation_token
-from django.utils.http import urlsafe_base64_encode
+from .tokens import account_activation_token
+from django.utils.http import urlsafe_base64_encode #encypt token to base64
 from django.utils.encoding import force_bytes, force_text
 
 from django.template.loader import render_to_string
@@ -18,7 +18,7 @@ import os
 
 
 # Create your views here.
-@login_required(login_url='/accounts/register')
+# @login_required(login_url='/accounts/register')
 def index(request):
     images = Image.get_images()
     return render(request, 'home.html', {"images":images})
@@ -49,7 +49,7 @@ def signingup(request):
 #has importation errors due to incompatibility of dependency(libraries) versions
 
 
-# def activation(request, uidb64, token):
+# def activate(request, uidb64, token):
 #   try:
 #     uid = force_text(urlsafe_base64_decode(uidb64))
 #     user = User.objects.get()
@@ -61,7 +61,7 @@ def signingup(request):
 #     user.profile.email_confirmed = True
 #     user.save()
 #     login(request, user)
-#     return render('request', 'emailactivate.html', {"uid":uid, "token":token})
+#     return redirect(profile)
 #   else:
 #     return HttpResponse('The activation link is invalid')
 
@@ -84,7 +84,7 @@ def log_in(request):
     return render(request, 'registration/login.html',{"form":form})
 
 
-@login_required(login_url='/accounts/register/')
+# @login_required(login_url='/accounts/register/')
 def profile(request, id):
     '''
     function to create user profile

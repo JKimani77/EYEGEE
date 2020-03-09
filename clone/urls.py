@@ -5,11 +5,11 @@ from clone import views
 
 
 urlpatterns  = [
-    url('^$', views.index, name='index'),
-    url(r'^profile/$', views.profile, name='create-profile'),
-    url(r'^profile/<int:id>$', views.profile_user, name='dipslay-profile'),
-    url(r'^post/image/$', views.uploadimage, name = 'uploadimage'),
-    url(r'^search/$', views.search, name='searchbyusername'),
+    url('', views.index, name='index'),
+    url(r'^profile/', views.profile, name='create-profile'),
+    url(r'^profile/<int:id>', views.profile_user, name='dipslay-profile'),
+    url(r'^post/image/', views.uploadimage, name = 'uploadimage'),
+    url(r'^search/', views.search, name='searchbyusername'),
 ]
 
 if settings.DEBUG:
