@@ -1,47 +1,36 @@
-<nav class="navbar navbar-light bg-light">
+{% load static %}
+{% load bootstrap3 %}
 
-    <ul>
-      <button type="button" class="btn btn-default" aria-label="Right Align">
-        <span class="glyphicon glyphicon-camera" ></span>
-      </button>
-
-    
-      <!--search form-->
-      <li><a href=""></a></li>
-      <li><a href=""></a></li>
-
-      <form class="navbar-right" class="navbar-form" role="search" action="{% url 'searchbyusername' %}">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-
-    </ul>
-<!-- login route -->
-    <div class="col-sm-6 col-md-6">
-      {% if user.is_authenticated %}
-      <ul>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
-                    <span class="caret"></span>
-                </a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <a href="{%url 'index'%}">Home</a>
-            </li>
-            
-            <li>
-              <a href="/logout">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      {% else %}
-      <li>
-        <a class='btn btn-default' href="/accounts/login">Login</a>
-      </li>
-
-      {% endif %}
-    </div>
-    
-
-  </nav>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+  </head>
+  <body>
+    <nav id='main' class='navbar navbar-inverse'>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="{% url 'index' %}"><img id='icon' src="" alt="de icon"></a>
+        </div>
+        <div id='search' class="col-sm-4">
+          <form id='search' class='navbar-right' class='navbar-form' role='search' action="{% url 'searchbyusername' %}">
+            <div class="input-group">
+              <input type="text" class='form-control' placeholder="Search User" name='user'>
+              <div class="input-group-btn">
+                <button id='searchButton' class='btn btn-default' type='submit'><span class="glyphicon glyphicon-search"></span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class='action-icons' style="position: absolute; right: 0;">
+          <button type='submit' class='gicons'><a href="{% url 'new_post' %}"><span class="glyphicon glyphicon-pencil"></span></a></button>
+          <button type='submit' class='gicons'><a href="{% url 'display-profile'  %}"><span class="glyphicon glyphicon-user"></span></a></button>
+          <button type='submit' class='gicons'><a href="/logout"><span class="glyphicon glyphicon-log-out"></span></a></button>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
