@@ -127,11 +127,12 @@ def uploadimage(request):
         form = ImageForm()
     return render(request, 'uploadimage.html',{"form":form})
 
-# def specific_image(request, img_id):
-#     image = Image.objects.get(pk=img_id)
-    
-#     return render(request,'single_image.html',{"image":image})
-
+def search_user(request):
+    if 'user' in request.GET and request.GET['user']:
+        search_user = request.GET.get('user')
+        username_searched = Profile.search_by_profile(search_user)
+        message = f'{search_user}'
+        return render(request, 'search_profile.html',{"users":username_searched, "message":message})
 
 
 def log_out(request):
