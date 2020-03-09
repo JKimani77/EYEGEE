@@ -10,6 +10,8 @@ urlpatterns  = [
     url(r'^profile/<int:id>', views.profile_user, name='dipslay-profile'),
     url(r'^post/image/', views.uploadimage, name = 'uploadimage'),
     url(r'^search/', views.search, name='searchbyusername'),
+    # url(r'^logout/$', views.logout_view, name='logout'),
+    # url(r'^login/', views.login, name='login')
 ]
 
 if settings.DEBUG:

@@ -18,18 +18,19 @@ from django.conf.urls import url, include
 from django.contrib.auth import views
 from django.conf import settings
 from django.conf.urls.static import static
-# from django_registration.backends.simple.views import RegistrationView
-
+# from django_registration.backends.simple.views import LoginView
 # from clone.views import activate
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include ('clone.urls')),
-    # url(r'^accounts/', include('registration.backends.simple.urls')),
-    # url(r'^activate/<uidb64>/<token>/',activate, name='activate'),
-    # url(r'accounts/register/', RegistrationView.as_view(success_url='/profile/'),name='django_registration_register'),
+    url(r'^accounts/login/', views.LoginView.as_view(), name='login'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^logout/$', views.logout, {"next_page": 'index'}),
 ]
 
+# url(r'accounts/register/', RegistrationView.as_view(success_url='/profile/'),name='django_registration_register'),
+# url(r'^activate/<uidb64>/<token>/',activate, name='activate'),
 #path('logout/', views.logout, {"next_page": '/accounts/login'}), 
 #create view function to logout and config next_page after logout
