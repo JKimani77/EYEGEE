@@ -5,14 +5,17 @@ from clone import views
 
 
 urlpatterns  = [
-    url('', views.index, name='index'),
+    url('^$', views.index, name='index'),
     url(r'^profile/', views.profile, name='create-profile'),
     url(r'^profile/<int:id>', views.profile_user, name='dipslay-profile'),
     url(r'^post/image/', views.uploadimage, name = 'uploadimage'),
     url(r'^search/', views.search, name='searchbyusername'),
-    # url(r'^logout/$', views.logout_view, name='logout'),
-    # url(r'^login/', views.login, name='login')
+    url(r'^login/', views.login, name='login'),
+    url(r'^logout/$', views.logout_view, name='logout'),
+
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+        # url(r'^logout/$', views.logout_view, name='logout'),

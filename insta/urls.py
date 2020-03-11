@@ -25,12 +25,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include ('clone.urls')),
-    url(r'^accounts/login/', views.LoginView.as_view(), name='login'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^logout/$', views.logout, {"next_page": 'index'}),
+    url(r'^logout/', views.logout, {"next_page": ''}),
 ]
 
 # url(r'accounts/register/', RegistrationView.as_view(success_url='/profile/'),name='django_registration_register'),
 # url(r'^activate/<uidb64>/<token>/',activate, name='activate'),
-#path('logout/', views.logout, {"next_page": '/accounts/login'}), 
+# url(r'^accounts/login/', views.LoginView.as_view(), name='login'),
 #create view function to logout and config next_page after logout
+

@@ -10,9 +10,13 @@ class Meta:
     model = User
     fields = ('username','password1','password2','email')
 
-class FormLogin:
+class FormLogin(forms.ModelForm):
     username = forms.CharField(label='Username',max_length=100)
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User 
+        fields = ('username', 'password')
 
 class ProfileForm(forms.ModelForm):
     

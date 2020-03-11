@@ -18,7 +18,6 @@ import os
 
 
 # Create your views here.
-# @login_required(login_url='accounts/login/')
 def index(request):
     images = Image.get_images()
     return render(request, 'home.html', {"images":images})
@@ -40,10 +39,10 @@ def signingup(request):
                 })
             
             user.email_user(subject, message)
-            return redirect(index)
+            return 'We have just sent you an email'
         else:
-            form = SignUpForm()
-            return render(request, 'signup.html', {'form': form})
+            form = FormSignUp()
+        return render(request, 'registration/registration_form.html', {'form': form})
 
 #code for activation below uses django-six library
 def activate(request, uidb64, token):
@@ -63,6 +62,9 @@ def activate(request, uidb64, token):
     return HttpResponse('The activation link is invalid')
 
 def login(request):
+    '''
+    view function to display login form
+    '''
     if request.method=='POST':
         form = FormLogin(request.POST)
         if form.is_valid():
@@ -80,9 +82,8 @@ def login(request):
         form=FormLogin()
     return render(request, 'registration/login.html',{"form":form})
 
-
-# @login_required(login_url='/accounts/login/')
-def profile(request, id):
+@login_required(login_url='accounts/login')
+def profile(request):
     '''
     function to create user profile
     '''
@@ -98,7 +99,7 @@ def profile(request, id):
         form = ProfileForm()
     return render(request, 'profile.html',{"form":form})
 
-# @login_required(login_url='/accounts/login/')
+@login_required(login_url='accounts/login')
 def profile_user(request, id):
     '''
     funcion to display user profile
@@ -132,7 +133,7 @@ def search(request):
         return render(request, 'search.html',{"users":username_searched, "message":message})
 
 
-# def logout_view(request):
-#     logout(request)
+def logout_view(request):
+    logout(request)
 
-#     return redirect(index)
+    return redirect(index)
