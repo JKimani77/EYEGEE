@@ -19,7 +19,6 @@ class FormLogin(forms.ModelForm):
         fields = ('username', 'password')
 
 class ProfileForm(forms.ModelForm):
-    
     class Meta:
         model = Profile
         exlcude = ['follower_user', 'following_user']

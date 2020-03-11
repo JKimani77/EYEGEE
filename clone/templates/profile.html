@@ -1,28 +1,18 @@
 {% extends 'index.html' %}
-{%load bootstrap3 %}
-{% block content %}
+{% load bootstrap3 %}
+{%block content %}
+<br>
+<br>
 <div class="container">
-    <div class="row">
-        <div class="card">
-          <div>
-            <img style='width:35%;height:35%;border-radius:50%;' src="" alt="profile pic"><span style='padding-left:15px;font-size:50px;'>{{profile.username}}</span>
-          </div>
-        </div>
-      </div>
-
-</div>
-  
-
-<hr>
-
-{% for image in images %}
-<div style='padding-top:45px;border:rgb(207, 34, 34);' class="container">
   <div class="row">
-    <div style='box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);margin:auto;width:85%;' class="card">
-      <img class='img-responsive' src="{{image}}" alt="Image">
+    <h1 style="color: coral;">CREATE PROFILE</h1>
+    <div class="col-md-12">
+      <form action="{%url 'create-profile' %}" method="post">
+        {%csrf_token%}
+
+        {%bootstrap_form form%}
+        <input type="submit" class="btn btn default" value="Update my Profile">
+      </form>
     </div>
   </div>
 </div>
-{% endfor %}
-
-{% endblock %}

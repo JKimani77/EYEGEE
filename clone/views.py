@@ -92,7 +92,7 @@ def profile(request):
         form = ProfileForm(request.POST,request.FILES)
         if form.is_valid():
             profile =form.save(commit=False)
-            profile.user = current_user
+            current_user = profile.user
             profile.save()
             return redirect(index)
     else:
