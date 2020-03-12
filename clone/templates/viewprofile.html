@@ -1,8 +1,8 @@
-{%extends 'base.html'%}
-{%load bootstrap4 %}
+{%extends 'index.html'%}
+{%load bootstrap3 %}
 {%block content %}
 <br>
-<h2 style="text-align: center;">Profile</h2>
+<h2 style="text-align: center; color: coral;">Profile</h2>
 
 <div class="container">
     <div class="row">
@@ -24,8 +24,8 @@
             <p>{{image.image_caption}}</p>
             </div>
 
-
+            {% endfor %}
         </div>
-        {% endfor %}
+        
     </div>
 </div>

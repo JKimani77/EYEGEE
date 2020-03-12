@@ -20,15 +20,16 @@
           Dropdown
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{%url 'create-profile'%}">MyProfile</a>
-          <a class="dropdown-item" href="#"></a>
+          <a class="dropdown-item" href="{%url 'create-profile'%}">Update Profile</a>
+          <a class="dropdown-item" href="/profile/{{user.id}}">My Profile</a>
+          <a class="dropdown-item" href="/logout">LogOut</a>
           
         </div>
       </li>
      
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form method="GET" class="form-inline" action="{% url 'searchbyusername' %}">
+      <input  type="search" name= "user" placeholder="Search Usernames" aria-label="Search" >
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>

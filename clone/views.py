@@ -74,6 +74,7 @@ def login(request):
             user = authenticate(username,password)
             if user.is_active:
                 login(request,user)
+                print("You have logged into your account")
                 return redirect(index)
             else:
                 return HttpResponse("Your account is inactive")
@@ -92,9 +93,9 @@ def profile(request):
         form = ProfileForm(request.POST,request.FILES)
         if form.is_valid():
             profile =form.save(commit=False)
-            current_user = profile.user
+            profile.user = current_user 
             profile.save()
-            return redirect(index)
+            return redirect(profile_user)
     else:
         form = ProfileForm()
     return render(request, 'profile.html',{"form":form})

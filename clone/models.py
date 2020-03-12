@@ -10,7 +10,7 @@ class Profile(models.Model):
     '''
     profile model and its methods
     '''
-    profile_picture =models.ImageField(upload_to='media', blank = True) 
+    profile_picture =models.ImageField(upload_to='media', blank = True, null = True) 
     about = models.TextField(max_length=50)
     user =models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') 
     follower_user = models.IntegerField(blank=True , null=True)
