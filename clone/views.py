@@ -85,6 +85,7 @@ def login(request):
 
 @login_required(login_url='accounts/login')
 def profile(request):
+    print(request)
     '''
     function to create user profile
     '''
@@ -102,12 +103,12 @@ def profile(request):
 
 @login_required(login_url='accounts/login')
 def profile_user(request, id):
+    print(id)
     '''
     funcion to display user profile
     '''
-    current_user = request.user
     profile = Profile.objects.filter(user_id=id).all()
-    images = Image.objects.filter(profile_id=current_user.profile.id).all()
+    images = Image.objects.filter(profile=profile).all()
     return render(request, 'viewprofile.html', {"profile":profile, "images":images})
 
 def uploadimage(request):

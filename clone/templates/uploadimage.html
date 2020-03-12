@@ -1,20 +1,20 @@
   
-{%extends 'base.html'%}
-{%load bootstrap4 %}
+{%extends 'index.html'%}
+{%load bootstrap3 %}
 {%block content %}
 <br>
 <br>
 <br>
 <div class="container">
   <div class="row">
-    <h1>POST A PHOTO</h1>
+    <h1 style="color: coral;">POST A PHOTO</h1>
     <div class="col-md-12 mt-4 mx-auto">
 
 <form  action="{%url 'uploadimage'%}" method="POST" enctype="multipart/form-data">
     {%csrf_token%}
 
     {% bootstrap_form form %}
-    <input type="submit" class="btn btn-primary btn-lg" value="Post Photo">
+    <input type="submit" class="btn btn-primary btn-lg" value="Upload Images">
   </form>
   </div>
 </div>
