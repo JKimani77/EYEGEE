@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime as dt
+from cloudinary.models import CloudinaryField
+
 
 # image model-image,name,caption,profile(foreign),likes,comments
 # methods on image and profile models - save, del, update (caption in image model)
@@ -10,7 +12,7 @@ class Profile(models.Model):
     '''
     profile model and its methods
     '''
-    profile_picture =models.ImageField(upload_to='media', blank = True, null = True) 
+    profile_picture =CloudinaryField(blank = True, null = True) 
     about = models.TextField(max_length=50)
     user =models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile') 
     follower_user = models.IntegerField(blank=True , null=True)
@@ -43,7 +45,7 @@ class Image(models.Model):
     '''
     image model and its methods
     '''
-    image = models.ImageField(upload_to='media/', null=True)
+    image =CloudinaryField(blank=True, null=True)
     image_name = models.CharField(max_length=40)
     image_caption = models.TextField(max_length=100, null=True, blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True, null=True)

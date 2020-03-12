@@ -22,7 +22,8 @@
         <br>
         <div class="row">
             {%for image in images%}
-            <div class="card mt-4 mx-auto" style="width: 20rem;">
+            <div class="card mt-4 mx-auto" style="width: 40rem;">
+                <br>
             <img src="{{image.image.url}}" alt="card image">
             <h5 class="card-title">{{image.image_name}}</h5>
             <p>{{image.image_caption}}</p>
