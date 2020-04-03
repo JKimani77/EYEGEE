@@ -10,6 +10,9 @@ urlpatterns  = [
     url(r'^profile/(\d+)/$', views.profile_user, name='dipslay-profile'),
     url(r'^post/image/', views.uploadimage, name = 'uploadimage'),
     url(r'^search/', views.search, name='searchbyusername'),
+    url(r'^comment/(?P<id>\d+)/$', views.comment, name='comment'),
+    url(r'^image/(?P<img_id>\d+)/$', views.specific, name='single-image'),
+    url(r'^likes/(?P<img_id>\d+)/$', views.likes, name='likes'),
     # url(r'^login/', views.login, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
 

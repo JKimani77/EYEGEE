@@ -1,0 +1,36 @@
+{%extends 'index.html'%}
+{%load bootstrap3 %}
+{%block content %}
+<div class="container">
+    <div class="row">
+        <div class="card " style="width: 60rem; margin-right: auto;">
+            
+            <div class="card-body">
+              <img src="{{image.url}}" alt="Card image cap">
+              <h5 class="card-title">{{image.image_name}}</h5>
+              <p class="card-text">{{image.image_caption}}</p>
+              <p class="card-text">Posted by:{{image.profile.user.username}}</p>
+              <p class="card-text">Likes: {{}}</p>
+          </div>  
+      </div>
+    </div>
+    <br>
+    <br>
+    
+    <h2 style="color: coral;">COMMENTS</h2>
+    {%for comment in comments%}
+    <div class="row">
+        <div class="card " style="width: 40rem; margin-right: auto;">
+            <div class="card-body">
+              <h5 class="card-title">{{comment.image_id.image_name}}</h5>
+              <p class="card-text">{{comment.comment}}</p>
+              <p class="card-text">Posted by:{{comment.user_id.username}}</p>
+          </div>  
+      </div>
+
+    </div>
+    {%endfor%}
+</div>
+
+
+{%endblock%}

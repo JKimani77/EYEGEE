@@ -67,6 +67,11 @@ class Image(models.Model):
         return self.image_name
 
     @classmethod
+    def get_id(cls, id):
+        image = cls.objects.filter(id=id).all()
+        return image
+
+    @classmethod
     def get_images(cls):
         '''
         query images posted from the database
@@ -76,10 +81,12 @@ class Image(models.Model):
         images = cls.objects.all()
         return images
 
-    @classmethod
-    def get_image_id(cls, id):
-        img = cls.objects.filter(id=id).all()
-        return img
+    
+    
+
+    def update_caption(self, image_caption):
+        self.image_caption = image_caption
+        self.save()
 
 
 class Comment(models.Model):
@@ -89,3 +96,17 @@ class Comment(models.Model):
     comment = models.CharField(max_length=30)
     image_id = models.ForeignKey(Image, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save_comment(self):
+        self.save()
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    
+    def save_like(self):
+        self.save()
+
+class Followers(models.Model):
+    followerr_user = models.ForeignKey(Profile, related_name='%(class)s_follower_user',on_delete=models.CASCADE)
+    followingg_user = models.ForeignKey(Profile,related_name='%(class)s_following_user',on_delete=models.CASCADE)

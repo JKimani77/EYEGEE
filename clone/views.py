@@ -9,7 +9,7 @@ from django.utils.encoding import force_bytes, force_text
 
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
-from .models import Image, Profile, Comment
+from .models import Image, Profile, Comment, Likes, Followers
 from .forms import FormSignUp, FormLogin, ProfileForm, FormImage, CommentForm 
 
 
@@ -133,6 +133,41 @@ def search(request):
         username_searched = Profile.search_by_profile(search_user)
         message = f'{search_user}'
         return render(request, 'search.html',{"users":username_searched, "message":message})
+
+
+def specific(request, img_id):
+    '''
+    view function to show details of a single image
+    '''
+    image = Image.objects.get(pk=img_id) 
+    # likes = image.like_set.all().count()
+    comments = Comment.objects.filter(image_id=img_id).all()
+    return render(request,'singleimage.html',{"image":image, "comments":comments, "likes":likes})
+
+def comment(request, id):
+    '''
+    view for the render form
+    '''
+    current_user = request.user
+    image = Image.objects.get(pk=id)
+    if request.method=='POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user_id = current_user
+            comment.image_id = image
+            comment.save_comment()
+            return redirect(index)
+    else:
+        form= CommentForm()
+    return render(request, 'comment.html', {"form":form, "image":image})
+
+def likes(request, img_id):
+    current_user = request.user
+    current_image = Image.objects.get(pk=img_id)
+    likey= Like.objects.create(user=current_user, image=current_image)
+    
+    return redirect(index)
 
 
 def logout_view(request):
