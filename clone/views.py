@@ -115,12 +115,13 @@ def uploadimage(request):
     '''
     view function to post images
     '''
+    user = User.objects.exclude(id=request.user.id)
     current_user = request.user
     if request.method=='POST':
         form = FormImage(request.POST, request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.profile = current_user.profile
+            image.user = request.user.profile
             image.save()
             return redirect(index)
     else:
